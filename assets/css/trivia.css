@@ -1,0 +1,51 @@
+    
+    
+.container {
+    width: 960px;
+
+
+  }
+
+  .container2 {
+      position: relative;
+      top:20px;
+    left :80px;
+    width: 575px;
+    height: 200px;
+    background-color: dimgrey
+    
+
+
+  }
+
+  body {
+    background-image: url("https://i2-prod.birminghammail.co.uk/incoming/article8810129.ece/ALTERNATES/s1227b/The-Fighting-Cocks-in-Moseley.jpg");
+
+
+  }
+
+  .buttons {
+    margin-top: 30px;
+  }
+
+  .btn{
+      background-color: darkgrey
+  }
+
+
+
+
+  #btn1 #btn2 #btn3 #btn4 {
+    width: 500px;
+    height: 200px;
+    color: grey;
+    background-color: darkred;
+    font-size: 20px;
+    margin: 10px 40px 10px 0px;
+  }
+
+  .question {
+    color:black;
+    background-color:blue;
+    font-size: 20px;
+  }

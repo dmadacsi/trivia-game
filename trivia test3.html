@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet">
+<title>Quiz</title>
+</head>
+<body>
+    <form role="form">
+        <div class="form-group">
+          <label for="name-input">QUIZ TEAM NAME:</label>
+          <input class="form-control" id="name-input" type="text">
+          <button class="btn btn-default" id="add-user" type="submit">Submit</button>
+          
+        </div>
+    </form>
+
+
+    <div class = container>
+<h2 id="quiz_status"></h2><h2 id="name-display"> </h2>
+<div id="show-number"> Count</div>
+<!-- <img class="img-fluid mb-5 d-block mx-auto" src="https://www.croatiaweek.com/wp-content/uploads/2018/01/CroatiaQuizzin.jpg"
+            alt=""> -->
+<div id="quiz"></div>
+
+    </div>
+</body>
+<style>
+div#quiz{ border:rgb(41, 162, 176) 3px solid; padding:10px 40px 40px 40px; background-color:lightblue; width:75%;}
+body{
+    font-family:'Julius Sans One', sans-serif;
+    background-image: url("https://i2-prod.birminghammail.co.uk/incoming/article8810129.ece/ALTERNATES/s1227b/The-Fighting-Cocks-in-Moseley.jpg");
+
+}
+#name_display{
+  font-size: 40px;
+}
+
+
+.container{
+    position: relative;
+      top:20px;
+    left :80px;
+    width: 570px;
+    height: 200px;
+    background-color: rgb(198, 189, 189)   
+    
+}
+</style>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+
+
+
+// pos is position of where the user in the test or which question they're up to
+var pos = 0, quiz, quiz_status, question, choice, choices, chA, chB, chC, chD, correct = 0;
+
+
+var questions = [
+    ["Who was the 16th President?","Roosevelt","Kennedy","Lincoln"," Lennon", "C"],
+    [ "Who won the World Cup in 2002?", "Brazil", "Japan", " France", "Germany", "A"],
+    [ "Who played in the band Cream before he went solo?", " Sid Vicious"," Eric Clapton","Ronnie Wood", "Phil Collins", "B"],
+    [ "Budapest is the capital of?", " Romania"," Malaysia"," Hungary"," Indonesia", "C"]
+  ];
+  var number = 16;
+var intervalId;
+var intervalId2;
+var intervalId3;
+var count
+
+// this get function is short for the getElementById function	
+function get(x){
+  return document.getElementById(x);
+}
+function renderQuestion(){
+  quiz = get("quiz");
+  if(pos >= questions.length){
+    quiz.innerHTML = "<h2>You got "+correct+" of "+questions.length+" questions correct</h2>";
+    get("quiz_status").innerHTML = " PUB QUIZ IS OVER";
+    // resets the variable to allow users to restart the test
+    pos = 0;
+    correct = 0;
+    // stops rest of renderQuestion function running when quiz is completed
+    return false;
+  }
+  get("quiz_status").innerHTML = "Question "+(pos+1)+" of "+questions.length;
+  question = questions[pos][0];
+  chA = questions[pos][1];
+  chB = questions[pos][2];
+  chC = questions[pos][3];
+  chD = questions[pos][4];
+  quiz.innerHTML = "<h3>"+question+"</h3>";
+  // the += appends to the data we started on the line above
+  quiz.innerHTML += "<input type='radio' name='choices' value='A'> "+chA+"<br>";
+  quiz.innerHTML += "<input type='radio' name='choices' value='B'> "+chB+"<br>";
+  quiz.innerHTML += "<input type='radio' name='choices' value='C'> "+chC+"<br>";
+  quiz.innerHTML += "<input type='radio' name='choices' value='D'> "+chD+"<br><br>";
+  quiz.innerHTML += "<button onclick='checkAnswer()'>Submit Answer</button>";
+  intervalId = setInterval(checkAnswer, 1000 * 15);
+  //intervalId3=setInterval(run, 1000*10);
+ 
+
+}     
+  
+function run(){
+  number=16;
+  
+
+ 
+}
+
+
+
+
+function decrement() {
+
+//  Decrease number by one.
+number--;
+
+//  Show the number in the #show-number tag.
+$("#show-number").html("<h2>" + number + "</h2>")}
+
+
+intervalId2 = setInterval(decrement, 1000);
+
+
+
+
+
+function checkAnswer(){
+  // use getElementsByName because we have an array which it will loop through
+  choices = document.getElementsByName("choices");
+  for(var i=0; i<choices.length; i++){
+    if(choices[i].checked){
+      choice = choices[i].value;
+    }
+  }
+  // checks if answer matches the correct choice
+  if(choice == questions[pos][5]){
+    //each time there is a correct answer this value increases
+    correct++;
+  }
+  // changes position of which character user is on
+  pos++;
+  // then the renderQuestion function runs again to go to next question
+  
+  
+  clearInterval(intervalId);
+  
+  renderQuestion();
+  run();
+ 
+
+  
+
+}
+ 
+//QUIZ TEAM NAME - non persist
+window.addEventListener("load", renderQuestion, false);
+//
+$("#add-user").on("click", function(event) {
+      // prevent form from trying to submit/refresh the page
+      event.preventDefault();
+
+      // Capture User Inputs and store them into variables
+      var name = $("#name-input").val().trim();
+// Output all of the new information into the relevant HTML sections
+      $("#name-display").text(name);
+})
+
+</script>
+
+
+
+</html>
